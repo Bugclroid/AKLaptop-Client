@@ -46,7 +46,7 @@ export default function HomePage() {
             >
               Expert Laptop & PC Repair in Guwahati
             </TextAnimate>
-            <p className="mt-4 sm:mt-6 text-sm sm:text-lg text-blue-100 mx-auto inline-block bg-black/35 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4">
+            <p className="mt-4 sm:mt-6 text-sm sm:text-lg text-blue-100 mx-auto inline-block bg-black/35 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 will-change-transform">
               Same‑day diagnostics, transparent quotes, and skilled repairs for laptops, desktops, and peripherals.
               From cracked screens and weak batteries to data recovery and performance tune‑ups — we get you back up fast.
             </p>
@@ -75,10 +75,7 @@ export default function HomePage() {
                 description={item.description}
                 header={
                   <Suspense>
-                    <DirectionAwareHover imageUrl={item.imageUrl}>
-                    <p className="font-semibold">{item.title}</p>
-                    <p className="text-xs opacity-90">{item.description}</p>
-                    </DirectionAwareHover>
+                    <DirectionAwareHover imageUrl={item.imageUrl} />
                   </Suspense>
                 }
                 className={item.className}
@@ -137,12 +134,12 @@ export default function HomePage() {
         </div>
         <div className="relative flex w-screen flex-col items-center justify-center overflow-hidden">
           <Suspense>
-          <Marquee pauseOnHover className="[--duration:60s] [--gap:2.5rem]" respectReducedMotion={false}>
+          <Marquee pauseOnHover className="[--duration:60s] [--gap:2.5rem] w-screen" respectReducedMotion={false}>
             {firstRow(items).map((t) => (
               <ReviewCard key={t._id} name={t.authorName} body={t.content} rating={t.rating} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:60s] [--gap:2.5rem]" respectReducedMotion={false}>
+          <Marquee reverse pauseOnHover className="[--duration:60s] [--gap:2.5rem] w-screen" respectReducedMotion={false}>
             {secondRow(items).map((t) => (
               <ReviewCard key={t._id} name={t.authorName} body={t.content} rating={t.rating} />
             ))}
@@ -169,7 +166,7 @@ const bentoItems = [
     title: "Same‑day Repairs",
     description: "Fast fixes for common issues — screens, batteries, charging ports, and thermal problems — often same‑day.",
     header: (
-      <img loading="lazy" decoding="async"
+      <img loading="lazy" decoding="async" width="720" height="320" sizes="(min-width: 768px) 66vw, 100vw"
         src="/images/bento/same-day-repairs.jpg"
         alt="Same‑day repairs showcase"
         className="h-40 w-full rounded-xl object-cover md:h-48"
@@ -182,7 +179,7 @@ const bentoItems = [
     title: "Pro Diagnostics",
     description: "Structured thermal, power, and storage checks with clear, human‑readable reports and next‑step advice.",
     header: (
-      <img loading="lazy" decoding="async"
+      <img loading="lazy" decoding="async" width="368" height="280" sizes="(min-width: 768px) 33vw, 50vw"
         src="/images/bento/pro-diagnostics.jpg"
         alt="Professional diagnostics"
         className="h-40 w-full rounded-xl object-cover md:h-48"
@@ -195,7 +192,7 @@ const bentoItems = [
     title: "Clean Assembly",
     description: "Neat cable management, airflow‑first layouts, and noise‑aware builds for cool, stable performance.",
     header: (
-      <img loading="lazy" decoding="async"
+      <img loading="lazy" decoding="async" width="419" height="280" sizes="(min-width: 768px) 33vw, 50vw"
         src="/images/bento/clean-assembly.jpg"
         alt="Clean PC assembly"
         className="h-40 w-full rounded-xl object-cover md:h-48"
@@ -208,7 +205,7 @@ const bentoItems = [
     title: "Transparent Quotes",
     description: "Clear pricing with no surprise fees. You’ll get updates at every step before work proceeds.",
     header: (
-      <img loading="lazy" decoding="async"
+      <img loading="lazy" decoding="async" width="720" height="320" sizes="(min-width: 768px) 66vw, 100vw"
         src="/images/bento/transparent-quotes.jpg"
         alt="Transparent quotes"
         className="h-40 w-full rounded-xl object-cover md:h-48"
@@ -293,7 +290,7 @@ const benefitItems = [
     title: "Fast Turnaround",
     description: "Most issues resolved in 24–48 hours (subject to parts) with proactive status updates.",
     header: (
-      <img loading="lazy" decoding="async" src="/images/benefits/fast-turnaround.jpg" alt="Fast turnaround" className="h-36 w-full rounded-xl object-cover md:h-40" />
+      <img loading="lazy" decoding="async" width="620" height="240" sizes="(min-width: 768px) 33vw, 50vw" src="/images/benefits/fast-turnaround.jpg" alt="Fast turnaround" className="h-36 w-full rounded-xl object-cover md:h-40" />
     ),
     className: "col-span-1 sm:col-span-1 md:col-span-1",
     icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
@@ -302,7 +299,7 @@ const benefitItems = [
     title: "Affordable Pricing",
     description: "Fair, upfront pricing. No hidden fees. Student discounts available with ID.",
     header: (
-      <img loading="lazy" decoding="async" src="/images/benefits/affordable-pricing.jpg" alt="Affordable pricing" className="h-36 w-full rounded-xl object-cover md:h-40" />
+      <img loading="lazy" decoding="async" width="280" height="280" sizes="(min-width: 768px) 33vw, 50vw" src="/images/benefits/affordable-pricing.jpg" alt="Affordable pricing" className="h-36 w-full rounded-xl object-cover md:h-40" />
     ),
     className: "col-span-1 sm:col-span-1 md:col-span-1",
     icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
@@ -311,7 +308,7 @@ const benefitItems = [
     title: "Experienced Technicians",
     description: "Years of hands‑on repair experience across laptops, PCs, and peripherals.",
     header: (
-      <img loading="lazy" decoding="async" src="/images/benefits/experienced-techs.jpg" alt="Experienced technicians" className="h-36 w-full rounded-xl object-cover md:h-40" />
+      <img loading="lazy" decoding="async" width="620" height="240" sizes="(min-width: 768px) 66vw, 100vw" src="/images/benefits/experienced-techs.jpg" alt="Experienced technicians" className="h-36 w-full rounded-xl object-cover md:h-40" />
     ),
     className: "col-span-2 sm:col-span-2 md:col-span-1",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,

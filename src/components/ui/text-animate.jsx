@@ -41,38 +41,35 @@ const defaultItemAnimationVariants = {
   blurIn: {
     container: defaultContainerVariants,
     item: {
-      hidden: { opacity: 0, filter: "blur(10px)" },
-      show: { opacity: 1, filter: "blur(0px)", transition: { duration: 0.3 } },
-      exit: { opacity: 0, filter: "blur(10px)", transition: { duration: 0.3 } },
+      hidden: { opacity: 0, y: 4 },
+      show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+      exit: { opacity: 0, y: 4, transition: { duration: 0.3 } },
     },
   },
   blurInUp: {
     container: defaultContainerVariants,
     item: {
-      hidden: { opacity: 0, filter: "blur(10px)", y: 20 },
+      hidden: { opacity: 0, y: 20 },
       show: {
         opacity: 1,
-        filter: "blur(0px)",
         y: 0,
-        transition: { y: { duration: 0.3 }, opacity: { duration: 0.4 }, filter: { duration: 0.3 } },
+        transition: { y: { duration: 0.3 }, opacity: { duration: 0.4 } },
       },
       exit: {
         opacity: 0,
-        filter: "blur(10px)",
         y: 20,
-        transition: { y: { duration: 0.3 }, opacity: { duration: 0.4 }, filter: { duration: 0.3 } },
+        transition: { y: { duration: 0.3 }, opacity: { duration: 0.4 } },
       },
     },
   },
   blurInDown: {
     container: defaultContainerVariants,
     item: {
-      hidden: { opacity: 0, filter: "blur(10px)", y: -20 },
+      hidden: { opacity: 0, y: -20 },
       show: {
         opacity: 1,
-        filter: "blur(0px)",
         y: 0,
-        transition: { y: { duration: 0.3 }, opacity: { duration: 0.4 }, filter: { duration: 0.3 } },
+        transition: { y: { duration: 0.3 }, opacity: { duration: 0.4 } },
       },
     },
   },

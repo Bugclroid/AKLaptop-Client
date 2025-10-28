@@ -76,6 +76,9 @@ export const DirectionAwareHover = ({
               className={cn("h-full w-full object-cover scale-[1.15]", imageClassName)}
               width="1000"
               height="1000"
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 768px) 33vw, 50vw"
               src={imageUrl}
             />
           </motion.div>
