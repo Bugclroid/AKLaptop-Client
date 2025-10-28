@@ -1,16 +1,58 @@
-# React + Vite
+# AKLaptop Client (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Responsive single‑page application for AKLaptop. Public website (hero, services, testimonials, contact via WhatsApp) plus a protected admin dashboard to manage Jobs, Contacts, and Testimonials. Integrates with the AKLaptop Server API for CRUD, PDF generation/viewing, and email sending.
 
-Currently, two official plugins are available:
+## Features
+- Public site: hero, services, why choose us, testimonials, contact (WhatsApp)
+- Admin: login (JWT), dashboard with stats, jobs (CRUD + PDF + email), contacts (CRUD), testimonials (approve/delete)
+- Performance: route/lazy loading, mobile‑first, reduced motion handling, optimized images (lazy + async decode)
+- Deployment ready: Hostinger (static), configurable `VITE_API_URL`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React (Vite), React Router
+- Tailwind CSS
+- Axios
+- Framer Motion (light use for micro‑interactions)
 
-## React Compiler
+## Environment
+Create `client-final/.env` (never commit) from this template:
+```
+VITE_API_URL=https://your-api.example.com/api
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development
+```bash
+cd client-final
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Build (Hostinger)
+```bash
+cd client-final
+npm run build
+# Upload the CONTENTS of client-final/dist to your hosting root (e.g., public_html)
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### SPA Routing (.htaccess)
+Add this file to the hosting root:
+```
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+```
+
+## Admin Pages
+- Dashboard: stats + jobs table (mobile‑friendly)
+- Jobs: create/edit/delete, generate/view PDF, send PDF via email
+- Contacts: create/edit/delete
+- Testimonials: view all, approve/delete
+
+## Performance Tips
+- Convert large images to WebP and right‑size (hero ≤1600px, cards ≤1000px)
+- Set proper cache headers on static hosting
+- Ensure `VITE_API_URL` points to your production API (Railway)
+- Optional dev tool: remove bundle visualizer if added
