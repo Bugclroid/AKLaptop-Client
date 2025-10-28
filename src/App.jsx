@@ -46,7 +46,7 @@ function App() {
               </div>
             }>
               <Routes>
-                <Route element={<MainLayout />}> 
+                <Route element={<MainLayout />}>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/admin/login" element={<LoginPage />} />

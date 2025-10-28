@@ -2,8 +2,10 @@ import { cn } from "../../lib/utils";
 
 export const BentoGrid = ({ className, children }) => {
   return (
-    <div className={cn("mx-auto grid max-w-7xl grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 auto-rows-[20rem] sm:auto-rows-[22rem] md:auto-rows-[24rem]", className)}>
-      {children}
+    <div className={cn("w-full", className)}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+        {children}
+      </div>
     </div>
   );
 };
@@ -12,15 +14,33 @@ export const BentoGridItem = ({ className, title, description, header, icon }) =
   return (
     <div
       className={cn(
-        "group/bento shadow-input row-span-1 flex flex-col justify-between space-y-3 sm:space-y-4 rounded-xl border border-neutral-200 bg-white p-3 sm:p-4 transition duration-300 hover:shadow-xl dark:border-white/[0.2] dark:bg-black dark:shadow-none overflow-hidden",
+        "relative h-full flex flex-col rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:shadow-xl hover:shadow-white/10 group",
         className
       )}
     >
-      {header}
-      <div className="transition duration-200 group-hover/bento:translate-x-2">
-        {icon}
-        <div className="mt-2 mb-1 sm:mb-2 font-sans font-bold text-neutral-700 dark:text-neutral-200 text-base sm:text-lg break-words">{title}</div>
-        <div className="font-sans text-[0.8rem] sm:text-sm font-normal text-neutral-600 dark:text-neutral-300 break-words pb-3">{description}</div>
+      {/* Background Image */}
+      <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+        {header}
+      </div>
+
+      {/* Content Overlay */}
+      <div className="relative z-10 p-4 sm:p-6 flex flex-col h-full min-h-[260px] sm:min-h-[320px]">
+        {/* Title */}
+        <div className="mb-3 sm:mb-4">
+          <h3 className="text-xs sm:text-xs md:text-sm lg:text-base font-bold text-white leading-tight break-words hyphens-auto">
+            {title}
+          </h3>
+        </div>
+
+        {/* Description */}
+        <div className="flex-1 flex flex-col justify-end">
+          <p className="text-xs sm:text-sm md:text-base text-slate-200 leading-relaxed line-clamp-4 sm:line-clamp-5 md:line-clamp-6 group-hover:text-white transition-colors duration-200 mb-3 sm:mb-4 break-words">
+            {description}
+          </p>
+
+          {/* Bottom accent */}
+          <div className="h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
       </div>
     </div>
   );

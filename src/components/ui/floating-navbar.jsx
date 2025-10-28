@@ -19,13 +19,13 @@ export const FloatingNav = ({ navItems = [], className }) => {
   return (
     <>
       {/* Mobile Top Bar */}
-      <div className="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur md:hidden">
+      <div className="fixed top-0 inset-x-0 z-50 border-b border-white/20 bg-white/5 backdrop-blur-md md:hidden shadow-lg shadow-black/20">
         <div className="flex h-14 items-center justify-between px-4">
           <a href="/#home" className="text-white font-semibold">AKLaptop</a>
           <button
             aria-label="Toggle menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="text-white/90 px-2 py-1 border border-white/20 rounded-md"
+            className="text-white px-2 py-1 border border-white/20 rounded-md"
           >
             Menu
           </button>
@@ -43,7 +43,7 @@ export const FloatingNav = ({ navItems = [], className }) => {
                   <a
                     key={item.name}
                     href={item.link}
-                    className="text-white/90"
+                    className="text-white"
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.name}
@@ -62,13 +62,13 @@ export const FloatingNav = ({ navItems = [], className }) => {
           animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : -20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           className={cn(
-            "hidden md:flex fixed top-6 inset-x-0 mx-auto z-50 w-fit items-center rounded-full border bg-white/80 px-4 py-2 shadow backdrop-blur",
+            "hidden md:flex fixed top-6 inset-x-0 mx-auto z-50 w-fit items-center rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-4 py-2 shadow-lg shadow-black/20",
             className
           )}
         >
-          <div className="flex items-center gap-6 text-sm text-black">
+          <div className="flex items-center gap-6 text-sm text-white">
             {navItems.map((item) => (
-              <a key={item.name} href={item.link} className="hover:underline">
+              <a key={item.name} href={item.link} className="hover:underline text-white">
                 {item.name}
               </a>
             ))}

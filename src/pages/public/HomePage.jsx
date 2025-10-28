@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { getApprovedTestimonials } from '../../services/api'
-// import { AuroraBackground } from "../../components/ui/aurora-background";
 import { lazy, Suspense } from 'react'
 const FlickeringGrid = lazy(() => import("../../components/ui/flickering-grid").then(m => ({ default: m.FlickeringGrid })));
 const WarpBackground = lazy(() => import("../../components/ui/warp-background").then(m => ({ default: m.WarpBackground })));
@@ -8,7 +7,7 @@ import { TextAnimate } from "../../components/ui/text-animate";
 import { BentoGrid, BentoGridItem } from "../../components/ui/bento-grid";
 const DirectionAwareHover = lazy(() => import("../../components/ui/direction-aware-hover").then(m => ({ default: m.DirectionAwareHover })));
 import { motion } from "motion/react";
-import { IconClipboardCopy, IconFileBroken, IconSignature, IconTableColumn } from "@tabler/icons-react";
+import { IconClipboardCopy, IconFileBroken, IconSignature, IconTableColumn, IconTools, IconAward, IconHeart, IconQuote } from "@tabler/icons-react";
 const Marquee = lazy(() => import("../../components/ui/marquee").then(m => ({ default: m.Marquee })));
 import { ShimmerButton } from "../../components/ui/shimmer-button";
 
@@ -24,126 +23,219 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
+      {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0 -z-10 hidden sm:block">
         <Suspense>
           <FlickeringGrid color="rgb(59,130,246)" maxOpacity={0.15} squareSize={6} gridGap={8} flickerChance={0.15} />
         </Suspense>
       </div>
+
       {/* Hero Section */}
-      <section id="home" className="relative z-10 w-full pt-28">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center text-white">
-          <Suspense>
-          <WarpBackground className="rounded-2xl border-0 p-6 sm:p-10" beamsPerSide={1} beamDuration={4} beamDelayMax={2}>
-          <div className="mx-auto max-w-3xl">
-            <TextAnimate
-              as="h1"
-              animation="blurInUp"
-              by="word"
-              once
-              duration={0.6}
-              className="text-2xl sm:text-5xl font-extrabold tracking-tight leading-tight"
+      <section id="home" className="relative z-10 w-full pt-20 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-8"
             >
-              Expert Laptop & PC Repair in Guwahati
-            </TextAnimate>
-            <p className="mt-4 sm:mt-6 text-sm sm:text-lg text-blue-100 mx-auto inline-block bg-black/35 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 will-change-transform">
-              Same‑day diagnostics, transparent quotes, and skilled repairs for laptops, desktops, and peripherals.
-              From cracked screens and weak batteries to data recovery and performance tune‑ups — we get you back up fast.
-            </p>
-            <div className="mt-8 flex justify-center">
+              <IconTools className="mx-auto h-16 w-16 text-blue-400 mb-6" />
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                Expert Laptop & PC
+                <span className="block text-blue-400">Repair in Guwahati</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                Same-day diagnostics, transparent quotes, and skilled repairs for laptops, desktops, and peripherals.
+                From cracked screens to data recovery — we get you back up fast.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
               <a href="/contact">
-                <ShimmerButton background="rgba(255,255,255,0.1)" shimmerColor="#ffffff" className="backdrop-blur border-white/20">
-                  Contact Us
+                <ShimmerButton background="rgba(255,255,255,0.1)" className="backdrop-blur border-white/20">
+                  Get Started
                 </ShimmerButton>
               </a>
-            </div>
+              <a href="#services" className="text-slate-300 hover:text-white transition-colors flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/5">
+                <IconAward className="h-4 w-4" />
+                Our Services
+              </a>
+            </motion.div>
           </div>
-          </WarpBackground>
-          </Suspense>
         </div>
       </section>
 
       {/* Services Overview */}
-      <section id="services" className="relative z-10 w-full py-20">
+      <section id="services" className="relative z-10 w-full py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">Our Services</h2>
-          <BentoGrid className="grid-cols-2 md:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <IconTools className="mx-auto h-12 w-12 text-blue-400 mb-4" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Our Services</h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              Comprehensive repair solutions for all your technology needs
+            </p>
+          </motion.div>
+
+          <BentoGrid>
             {servicesItems.map((item, i) => (
-              <BentoGridItem
+              <motion.div
                 key={i}
-                title={item.title}
-                description={item.description}
-                header={
-                  <Suspense>
-                    <DirectionAwareHover imageUrl={item.imageUrl} />
-                  </Suspense>
-                }
-                className={item.className}
-                icon={item.icon}
-              />
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <BentoGridItem
+                  title={item.title}
+                  description={item.description}
+                  header={
+                    <Suspense>
+                      <DirectionAwareHover imageUrl={item.imageUrl} />
+                    </Suspense>
+                  }
+                  icon={item.icon}
+                />
+              </motion.div>
             ))}
           </BentoGrid>
         </div>
       </section>
 
       {/* Highlights (Bento Grid) */}
-      <section className="relative z-10 w-full py-12">
+      <section className="relative z-10 w-full py-24 bg-gradient-to-b from-transparent to-black/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">Highlights</h2>
-          <BentoGrid className="grid-cols-2 md:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <IconAward className="mx-auto h-12 w-12 text-yellow-400 mb-4" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Why Choose Us</h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              Experience excellence in every repair with our commitment to quality and customer satisfaction
+            </p>
+          </motion.div>
+
+          <BentoGrid>
             {bentoItems.map((item, i) => (
-              <BentoGridItem
+              <motion.div
                 key={i}
-                title={item.title}
-                description={item.description}
-                header={item.header}
-                className={item.className}
-                icon={item.icon}
-              />
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <BentoGridItem
+                  title={item.title}
+                  description={item.description}
+                  header={item.header}
+                  icon={item.icon}
+                />
+              </motion.div>
             ))}
           </BentoGrid>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="relative z-10 w-full py-20">
+      {/* Benefits */}
+      <section className="relative z-10 w-full py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Why Choose AKLaptop</h2>
-            <p className="mt-2 text-blue-100">Trusted by customers for quick, transparent, and expert service.</p>
-          </div>
-          <BentoGrid className="grid-cols-2 md:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <IconHeart className="mx-auto h-12 w-12 text-red-400 mb-4" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Our Commitment</h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              Trusted by customers for quick, transparent, and expert service
+            </p>
+          </motion.div>
+
+          <BentoGrid>
             {benefitItems.map((item, i) => (
-              <BentoGridItem
+              <motion.div
                 key={i}
-                title={item.title}
-                description={item.description}
-                header={item.header}
-                className={item.className}
-                icon={item.icon}
-              />
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <BentoGridItem
+                  title={item.title}
+                  description={item.description}
+                  header={item.header}
+                  icon={item.icon}
+                />
+              </motion.div>
             ))}
           </BentoGrid>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="relative z-10 w-full py-20">
+      <section id="testimonials" className="relative z-10 w-full py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">What Our Customers Say</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <IconQuote className="mx-auto h-12 w-12 text-green-400 mb-4" />
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Customer Reviews</h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              See what our satisfied customers have to say about our repair services
+            </p>
+          </motion.div>
         </div>
+
         <div className="relative flex w-screen flex-col items-center justify-center overflow-hidden">
           <Suspense>
-          <Marquee pauseOnHover className="[--duration:60s] [--gap:2.5rem] w-screen" respectReducedMotion={false}>
-            {firstRow(items).map((t) => (
-              <ReviewCard key={t._id} name={t.authorName} body={t.content} rating={t.rating} />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:60s] [--gap:2.5rem] w-screen" respectReducedMotion={false}>
-            {secondRow(items).map((t) => (
-              <ReviewCard key={t._id} name={t.authorName} body={t.content} rating={t.rating} />
-            ))}
-          </Marquee>
+            <Marquee pauseOnHover className="[--duration:60s] [--gap:2.5rem] w-screen" respectReducedMotion={false}>
+              {firstRow(items).map((t) => (
+                <motion.div
+                  key={t._id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <ReviewCard name={t.authorName} body={t.content} rating={t.rating} />
+                </motion.div>
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover className="[--duration:60s] [--gap:2.5rem] w-screen" respectReducedMotion={false}>
+              {secondRow(items).map((t) => (
+                <motion.div
+                  key={t._id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <ReviewCard name={t.authorName} body={t.content} rating={t.rating} />
+                </motion.div>
+              ))}
+            </Marquee>
           </Suspense>
         </div>
       </section>
@@ -201,19 +293,6 @@ const bentoItems = [
     className: "md:col-span-1",
     icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
   },
-  {
-    title: "Transparent Quotes",
-    description: "Clear pricing with no surprise fees. You’ll get updates at every step before work proceeds.",
-    header: (
-      <img loading="lazy" decoding="async" width="720" height="320" sizes="(min-width: 768px) 66vw, 100vw"
-        src="/images/bento/transparent-quotes.jpg"
-        alt="Transparent quotes"
-        className="h-40 w-full rounded-xl object-cover md:h-48"
-      />
-    ),
-    className: "md:col-span-2",
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
 ];
 
 function firstRow(arr){
@@ -227,15 +306,19 @@ function secondRow(arr){
 
 function ReviewCard({ name, body, rating }){
   return (
-    <figure className="relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4 mx-2 border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05] dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]">
-      <div className="flex flex-row items-center gap-2">
-        <div className="h-8 w-8 rounded-full bg-gradient-to-r from-pink-500 to-violet-500" />
+    <figure className="relative h-full w-64 mx-2 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-lg shadow-black/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300">
+      <div className="flex flex-row items-center gap-3 mb-4">
+        <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+          <span className="text-white font-semibold text-sm">{name.charAt(0).toUpperCase()}</span>
+        </div>
         <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">{name}</figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{'★'.repeat(rating || 5)}</p>
+          <figcaption className="text-sm font-semibold text-white">{name}</figcaption>
+          <div className="flex text-yellow-400 text-xs">
+            {'★'.repeat(rating || 5)}
+          </div>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm text-neutral-800 dark:text-neutral-200">{body}</blockquote>
+      <blockquote className="text-sm text-slate-300 leading-relaxed italic">"{body}"</blockquote>
     </figure>
   )
 }
